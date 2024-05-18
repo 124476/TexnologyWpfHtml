@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DragAndDrop</title>
+</head>
+<body>
+<h3>XAML</h3>
+<img src="/static/images/Image6.png">
+<h3>Code</h3>
+<pre><code>private void DragOne_Drop(object sender, DragEventArgs e)
+{
+    if (StackMain.Children.IndexOf(sender as TextBlock) != StackMain.Children.IndexOf(textBlockLocal))
+    {
+        int index = StackMain.Children.IndexOf(sender as TextBlock);
+        StackMain.Children.Remove(textBlockLocal);
+        StackMain.Children.Insert(index, textBlockLocal);
+    }
+}
+
+private void DragOne_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+{
+    TextBlock textBlock = sender as TextBlock;
+    if (textBlock != null)
+    {
+        textBlockLocal = textBlock;
+        DragDrop.DoDragDrop(this, "", DragDropEffects.Copy);
+    }
+}</code></pre>
+</body>
+</html>

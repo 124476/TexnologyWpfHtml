@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Развертование колонны</title>
+</head>
+<body>
+<h3>Code</h3>
+<pre><code>private void ClosePage_Click(object sender, RoutedEventArgs e)
+{
+    ColumnOne.Width = new GridLength(0);
+    OpenPage.Visibility = Visibility.Visible;
+}
+
+private void OpenPage_Click(object sender, RoutedEventArgs e)
+{
+    ColumnOne.Width = GridLength.Auto;
+    OpenPage.Visibility = Visibility.Hidden;
+}</code></pre>
+</body>
+</html>

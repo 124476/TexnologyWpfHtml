@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Запись в Excel</title>
+</head>
+<body>
+<h3>Code</h3>
+<pre><code>var dialog = new SaveFileDialog() { Filter = "*.xlsx; | *.xlsx;" };
+if (dialog.ShowDialog().GetValueOrDefault())
+{
+    Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
+    Workbook workbook = excelApp.Workbooks.Add(XlWBATemplate.xlWBATWorksheet);
+    Worksheet worksheet = workbook.Worksheets[1];
+    worksheet.Name = "Grafik";
+
+    int i = 2;
+    worksheet.Range["A1"].Value = "Id";
+    worksheet.Range["B1"].Value = "Num";
+
+    foreach (var item in App.DB.Grafik)
+    {
+        worksheet.Range["A" + i.ToString()].Value = i - 1;
+        worksheet.Range["B" + i.ToString()].Value = item.Num;
+        i++;
+    }
+    workbook.SaveAs(dialog.FileName);
+}</code></pre>
+</body>
+</html>

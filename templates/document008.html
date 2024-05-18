@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Загрузка множества фото</title>
+</head>
+<body>
+<h3>Code</h3>
+<pre><code>var dialog = new OpenFileDialog() { Filter = "*.png; | *.png;", Multiselect=true };
+if (dialog.ShowDialog().GetValueOrDefault())
+{
+    var files = dialog.FileNames;
+    foreach(var file in files)
+    {
+        User user = new User();
+        user.Photo = File.ReadAllBytes(file);
+        user.Name = file;
+        App.DB.User.Add(user);
+    }
+    App.DB.SaveChanges();
+    Refresh();
+}</code></pre>
+</body>
+</html>

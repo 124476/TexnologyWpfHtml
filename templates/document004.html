@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Созранение в xml</title>
+</head>
+<body>
+<h3>Code</h3>
+<pre><code>var dialog = new SaveFileDialog() { Filter = "*.xml; | *.xml;" };
+if (dialog.ShowDialog().GetValueOrDefault())
+{
+    var file = File.Create(dialog.FileName);
+
+    var encoder = new XmlSerializer(App.DB.User.ToList().GetType());
+    encoder.Serialize(file, App.DB.User.ToList());
+    file.Close();
+}</code></pre>
+</body>
+</html>

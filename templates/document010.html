@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Генерация (Рандом)</title>
+</head>
+<body>
+<h3>Code</h3>
+<pre><code>
+    Random random = new Random();
+    string text = "";
+    text += (char)random.Next('A', 'Z' + 1);
+    text += (char)random.Next('0', '9' + 1);
+    text += (char)random.Next('0', '9' + 1);
+    text += (char)random.Next('0', '9' + 1);
+    text += (char)random.Next('A', 'Z' + 1);
+    text += (char)random.Next('A', 'Z' + 1);
+    RandomText.Text = text;
+</code></pre>
+</body>
+</html>

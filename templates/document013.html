@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QrCode (Кодирование, раскодирование, скачивание)</title>
+</head>
+<body>
+<h3>Library</h3>
+<p>MessagingToolKit</p>
+<h3>XAML</h3>
+<img src="/static/images/Image7.png">
+<h3>Code</h3>
+<pre><code>private void SaveQr_Click(object sender, RoutedEventArgs e)
+{
+    var dialog = new SaveFileDialog() { Filter = "*.png; | *.png;" };
+    if (dialog.ShowDialog().GetValueOrDefault())
+    {
+        var file = File.Create(dialog.FileName);
+
+        var encoder = new JpegBitmapEncoder();
+        BitmapSource bitmapSource = (BitmapSource)QrI.Source;
+        encoder.Frames.Add(BitmapFrame.Create(bitmapSource));
+
+        using (MemoryStream ms = new MemoryStream())
+        {
+            encoder.Save(file);
+            file.Close();
+        }
+    }
+}
+
+private void SetQr_Click(object sender, RoutedEventArgs e)
+{
+    var dialog = new OpenFileDialog() { Filter = "*.png; | *.png;" };
+    if (dialog.ShowDialog().GetValueOrDefault())
+    {
+        var imageBytes = File.ReadAllBytes(dialog.FileName);
+        using (MemoryStream ms = new MemoryStream(imageBytes))
+        {
+            var image = new BitmapImage();
+            image.BeginInit();
+            image.StreamSource = ms;
+            image.CacheOption = BitmapCacheOption.OnLoad;
+            image.EndInit();
+
+            QrI.Source = image;
+            using (MemoryStream mss = new MemoryStream(imageBytes))
+            {
+                var decoder = new QRCodeDecoder();
+                Bitmap bitmap = new Bitmap(mss);
+                QrText.Text = decoder.Decode(new QRCodeBitmapImage(bitmap));
+            }
+        }
+    }
+}
+
+private void GotQr_Click(object sender, RoutedEventArgs e)
+{
+    var encoder = new QRCodeEncoder();
+    var bitmapImage = encoder.Encode(QrText.Text);
+
+    using (MemoryStream ms = new MemoryStream())
+    {
+        ms.Position = 0;
+        bitmapImage.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+
+        var image = new BitmapImage();
+        image.BeginInit();
+        image.CacheOption = BitmapCacheOption.OnLoad;
+        image.StreamSource = ms;
+        image.EndInit();
+
+        QrI.Source = image;
+    }
+}</code></pre>
+</body>
+</html>

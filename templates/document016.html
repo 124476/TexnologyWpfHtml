@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Версия сборки</title>
+</head>
+<body>
+<h3>Code</h3>
+<pre><code>
+    var version = Assembly.GetEntryAssembly().GetName().Version;
+
+    VersionPkText.Text = version.Major.ToString() + "." + version.Minor.ToString() + "." + version.Build.ToString();</code></pre>
+</body>
+</html>

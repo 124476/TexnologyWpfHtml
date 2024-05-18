@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Цветное / Серое фото</title>
+</head>
+<body>
+<h3>Code</h3>
+<pre><code>using (MemoryStream ms = new MemoryStream(user.Photo))
+{
+    var bitmapImage = new BitmapImage();
+    bitmapImage.BeginInit();
+    bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+    bitmapImage.StreamSource = ms;
+    bitmapImage.EndInit();
+
+    using (MemoryStream mss = new MemoryStream())
+    {
+        if (IsGray)
+        {
+            var imageColor = new FormatConvertedBitmap();
+            imageColor.BeginInit();
+            imageColor.Source = bitmapImage;
+            imageColor.DestinationFormat = PixelFormats.Gray32Float;
+            imageColor.EndInit();
+            Photo.Source = imageColor;
+        }
+        else
+        {
+            Photo.Source = bitmapImage;
+        }
+    }
+}</code></pre>
+</body>
+</html>

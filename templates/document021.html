@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Скачивание фотографий в папку</title>
+</head>
+<body>
+<h3>Code</h3>
+<pre><code>private void SaveForPhotos_Click(object sender, RoutedEventArgs e)
+{
+    var dbDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Photos");
+    if (!Directory.Exists(dbDir))
+    {
+        Directory.CreateDirectory(dbDir);
+    }
+
+    dbDir += "/";
+
+    int txtFile = 0;
+    foreach(var item in App.DB.User)
+    {
+        var dialogFile = dbDir + txtFile + ".png";
+
+        var file = File.Create(dialogFile);
+        file.Close();
+
+        File.WriteAllBytes(dialogFile, item.Photo);
+        txtFile += 1;
+    }
+
+    MessageBox.Show($"Все фотографии сохранены в папку {dbDir}");
+}</code></pre>
+</body>
+</html>

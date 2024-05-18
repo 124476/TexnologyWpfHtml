@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Timer</title>
+</head>
+<body>
+<h3>Code</h3>
+<pre><code>DispatcherTimer timer;
+
+public PageNew()
+{
+    InitializeComponent();
+
+    timer = new DispatcherTimer();
+    timer.Tick += Timer_Tick;
+    timer.Interval = TimeSpan.FromSeconds(2);
+}
+
+private void StartTimer_Click(object sender, RoutedEventArgs e)
+{
+    timer.Start();
+}
+
+private void Timer_Tick(object sender, EventArgs e)
+{
+    startingTimer += 1;
+    SetTimerText.Text = startingTimer.ToString();
+}
+
+private void StopTimer_Click(object sender, RoutedEventArgs e)
+{
+    timer.Stop();
+}
+
+</code></pre>
+</body>
+</html>

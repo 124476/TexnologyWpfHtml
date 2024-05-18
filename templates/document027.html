@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Дерево (TreeView), формируется из ссылки на самого себя</title>
+</head>
+<body>
+<h3>XAML</h3>
+<img src="/static/images/Image12.png">
+<h3>Code</h3>
+<pre><code>var user = App.DB.User.FirstOrDefault();
+    var lider = user.MaxUser;
+    items = new List<TreeViewItem>();
+
+    TreePanel.Items.Clear();
+    TreeViewItem treeViewItem = new TreeViewItem();
+    treeViewItem.Header = lider.FullName;
+    TreePanel.Items.Add(treeViewItem);
+
+    items.Add(treeViewItem);
+
+    var users = App.DB.User.Where(x => x.LiderId == lider.Id).ToList();
+    foreach(var item in users)
+    {
+        StartNewUser(item);
+        items.Remove(items[items.Count - 1]);
+    }
+
+private void StartNewUser(User lider)
+{
+    TreeViewItem treeViewItem = new TreeViewItem();
+    treeViewItem.Header = lider.FullName;
+    items[items.Count - 1].Items.Add(treeViewItem);
+
+    items.Add(treeViewItem);
+
+    var users = App.DB.User.Where(x => x.LiderId == lider.Id).ToList();
+    foreach (var item in users)
+    {
+        StartNewUser(item);
+        items.Remove(items[items.Count - 1]);
+    }
+}</code></pre>
+</body>
+</html>

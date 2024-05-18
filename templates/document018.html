@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Рисование</title>
+</head>
+<body>
+<h3>XAML</h3>
+<img src="/static/images/Image8.png">
+<h3>Code</h3>
+<pre><code>int x1 = 0;
+int y1 = 0;
+
+foreach(var item in App.DB.Grafik)
+{
+    Line line = new Line();
+    line.X1 = x1;
+    line.X2 = x1 + 5;
+    line.Y1 = -y1 + 100;
+    line.Y2 = -item.Num + 100;
+    line.Stroke = Brushes.Red;
+    canvasDrive.Children.Add(line);
+    x1 += 5;
+    y1 = item.Num;
+}</code></pre>
+</body>
+</html>

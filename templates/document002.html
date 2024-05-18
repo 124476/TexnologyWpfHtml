@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Скрин Gridа</title>
+</head>
+<body>
+<h3>Code</h3>
+<pre><code>var dialog = new SaveFileDialog() { Filter = "*.jpeg; | *.jpeg;" };
+if (dialog.ShowDialog().GetValueOrDefault())
+{
+    var render = new RenderTargetBitmap((int)GridCopy.ActualWidth, (int)GridCopy.ActualHeight, 96, 96, PixelFormats.Pbgra32);
+    render.Render(GridCopy);
+    var encoder = new JpegBitmapEncoder();
+    encoder.Frames.Add(BitmapFrame.Create(render));
+    using(var file = new FileStream(dialog.FileName, FileMode.Create))
+    {
+        encoder.Save(file);
+    }
+}</code>
+</pre>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Просмотр Excel</title>
+</head>
+<body>
+<h3>Code</h3>
+<pre><code>var dialog = new OpenFileDialog() { Filter = "*.xlsx; | *.xlsx;" };
+if (dialog.ShowDialog().GetValueOrDefault())
+{
+    Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
+    Workbook workbook = excelApp.Workbooks.Open(dialog.FileName);
+    Worksheet worksheet = workbook.Worksheets[1];
+    Range objects = worksheet.UsedRange;
+
+    int i = 2;
+    while (objects[1][i].Value != null)
+    {
+        grafiks.Add(new Grafik()
+        {
+            Num = int.Parse(objects[2][i].Value.ToString())
+        });
+        i++;
+    }
+
+}</code></pre>
+</body>
+</html>

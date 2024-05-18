@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>График</title>
+</head>
+<body>
+<h3>Library</h3>
+LiveChart
+<h3>XAML</h3>
+<img src="/static/images/Image11.png">
+<h3>Code</h3>
+<pre><code>ChartValues< double > doubles = new ChartValues< double >();
+foreach (var item in App.DB.Grafik)
+{
+    doubles.Add(item.Num);
+}
+
+var seriaes = new LiveCharts.SeriesCollection()
+{
+    new LineSeries
+    {
+        Title = "Grafik",
+        Values = doubles,
+        Fill = null
+    }
+};
+
+Cartes.Series = seriaes;</code></pre>
+</body>
+</html>
